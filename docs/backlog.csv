@@ -1,0 +1,26 @@
+WBS,Issue,Title,Assignee,Role,Priority,Complexity,Hours,Start date,End date,Milestone,Dependencies,URL
+1,7,Уточнить правила и границы первой версии,Wijerty,PM,P0,small,2,2026-10-28,2026-10-28,1. Подготовка и настройка,,https://github.com/Wijerty/habit-tracker-srs/issues/7
+2,8,Описать модель привычек и истории,Wijerty,Backend,P0,medium,4,2026-10-29,2026-10-29,1. Подготовка и настройка,#7,https://github.com/Wijerty/habit-tracker-srs/issues/8
+3,9,Подготовить макеты основных сценариев,Wijerty,Дизайнер,P0,medium,6,2026-10-30,2026-11-02,1. Подготовка и настройка,#7,https://github.com/Wijerty/habit-tracker-srs/issues/9
+4,10,Настроить окружение и проверки сборки,Wijerty,Frontend,P0,small,2,2026-11-03,2026-11-03,1. Подготовка и настройка,#7,https://github.com/Wijerty/habit-tracker-srs/issues/10
+5,11,Реализовать надёжное локальное хранилище,Wijerty,Backend,P0,large,8,2026-11-04,2026-11-05,2. Базовый функционал,"#8,#10",https://github.com/Wijerty/habit-tracker-srs/issues/11
+6,12,Добавить валидацию параметров привычки,Wijerty,Backend,P0,medium,4,2026-11-06,2026-11-06,2. Базовый функционал,"#8,#11",https://github.com/Wijerty/habit-tracker-srs/issues/12
+7,13,Создать форму добавления привычки,Wijerty,Frontend,P0,medium,4,2026-11-09,2026-11-09,2. Базовый функционал,"#9,#11,#12",https://github.com/Wijerty/habit-tracker-srs/issues/13
+8,14,Реализовать ежедневное и недельное расписание,Wijerty,Backend,P0,medium,4,2026-11-10,2026-11-10,2. Базовый функционал,"#12,#13",https://github.com/Wijerty/habit-tracker-srs/issues/14
+9,15,Показать список активных привычек,Wijerty,Frontend,P0,medium,4,2026-11-11,2026-11-11,2. Базовый функционал,"#13,#14",https://github.com/Wijerty/habit-tracker-srs/issues/15
+10,16,Добавить редактирование привычки,Wijerty,Frontend,P0,medium,4,2026-11-12,2026-11-12,2. Базовый функционал,"#14,#15",https://github.com/Wijerty/habit-tracker-srs/issues/16
+11,17,Добавить архивирование с подтверждением,Wijerty,Frontend,P0,medium,4,2026-11-13,2026-11-13,2. Базовый функционал,"#15,#16",https://github.com/Wijerty/habit-tracker-srs/issues/17
+12,18,Добавить архив и восстановление привычки,Wijerty,Frontend,P1,small,2,2026-11-16,2026-11-16,2. Базовый функционал,#17,https://github.com/Wijerty/habit-tracker-srs/issues/18
+13,19,Реализовать отметку выполнения за сегодня,Wijerty,Backend,P0,medium,4,2026-11-17,2026-11-17,2. Базовый функционал,"#11,#14,#15",https://github.com/Wijerty/habit-tracker-srs/issues/19
+14,20,Реализовать отмену отметки за сегодня,Wijerty,Backend,P0,small,2,2026-11-18,2026-11-18,2. Базовый функционал,#19,https://github.com/Wijerty/habit-tracker-srs/issues/20
+15,21,Добавить календарь истории за 30 дней,Wijerty,Frontend,P0,medium,6,2026-11-19,2026-11-20,3. Прогресс и напоминания,"#9,#14,#20",https://github.com/Wijerty/habit-tracker-srs/issues/21
+16,22,Рассчитать текущую серию выполнений,Wijerty,Backend,P0,large,8,2026-11-23,2026-11-24,3. Прогресс и напоминания,"#14,#21",https://github.com/Wijerty/habit-tracker-srs/issues/22
+17,23,Добавить настройки напоминаний,Wijerty,Frontend,P1,medium,4,2026-11-25,2026-11-25,3. Прогресс и напоминания,"#16,#17",https://github.com/Wijerty/habit-tracker-srs/issues/23
+18,24,Реализовать доставку браузерных уведомлений,Wijerty,Backend,P1,large,8,2026-11-26,2026-11-27,3. Прогресс и напоминания,"#14,#17,#23",https://github.com/Wijerty/habit-tracker-srs/issues/24
+19,25,Добавить статистику за неделю и месяц,Wijerty,Frontend,P1,medium,6,2026-11-30,2026-12-01,3. Прогресс и напоминания,"#20,#22",https://github.com/Wijerty/habit-tracker-srs/issues/25
+20,26,Обеспечить адаптивность и управление клавиатурой,Wijerty,Frontend,P0,medium,4,2026-12-02,2026-12-02,3. Прогресс и напоминания,"#18,#21,#23,#25",https://github.com/Wijerty/habit-tracker-srs/issues/26
+21,27,Обеспечить повторное открытие без сети,Wijerty,Frontend,P0,medium,6,2026-12-03,2026-12-04,3. Прогресс и напоминания,"#10,#11,#26",https://github.com/Wijerty/habit-tracker-srs/issues/27
+22,28,Проверить сохранение и обработку сбоев,Wijerty,QA,P0,medium,4,2026-12-07,2026-12-07,4. Финальное тестирование и релиз,"#11,#18,#20,#27",https://github.com/Wijerty/habit-tracker-srs/issues/28
+23,29,Провести регрессию по критериям ТЗ,Wijerty,QA,P0,medium,6,2026-12-08,2026-12-09,4. Финальное тестирование и релиз,"#22,#24,#25,#26,#28",https://github.com/Wijerty/habit-tracker-srs/issues/29
+24,30,Исправить блокирующие дефекты и повторить проверки,Wijerty,Frontend,P0,medium,6,2026-12-10,2026-12-11,4. Финальное тестирование и релиз,#29,https://github.com/Wijerty/habit-tracker-srs/issues/30
+25,31,Подготовить релиз 1.0 и итоговую документацию,Wijerty,PM,P0,small,2,2026-12-22,2026-12-22,4. Финальное тестирование и релиз,#30,https://github.com/Wijerty/habit-tracker-srs/issues/31

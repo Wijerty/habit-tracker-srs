@@ -43,3 +43,17 @@
 ## Статус
 
 Учебный проект. Требования и критерии приёмки описаны в Wiki и Issues.
+
+
+## Лабораторная работа 2 — календарный план
+
+Подготовлен план разработки для одного исполнителя на **28.10–22.12.2026**: 25 детализированных задач, 4 контрольные точки, 114 часов работы и 24 часа резерва.
+
+- [План проекта и распределение ролей в Wiki](https://github.com/Wijerty/habit-tracker-srs/wiki/План-проекта)
+- [Roadmap / диаграмма Ганта](https://github.com/users/Wijerty/projects/1/views/1)
+- [Беклог — 25 задач](https://github.com/Wijerty/habit-tracker-srs/issues?q=is%3Aissue%20label%3A%22lab2%3A%20backlog%22)
+- [Контрольные точки](https://github.com/Wijerty/habit-tracker-srs/milestones)
+- [Копия плана в репозитории](docs/project-plan.md)
+- [Календарная таблица CSV](docs/backlog.csv) · [Данные JSON](docs/backlog.json)
+
+Issues #1–#6 — исходные верхнеуровневые требования; Issues #7–#31 — их детализированный беклог. Реализация приложения запланирована, а выполнение задач пока не заявляется.
