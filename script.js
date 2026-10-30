@@ -20,7 +20,21 @@ const HabitCore = (() => {
     return parsed;
   }
   function save(storage, habits) { storage.setItem(KEY, JSON.stringify(habits)); }
-  return { KEY, validTime, validate, load, save };
+  function localDate(date = new Date()) {
+    const pad = n => String(n).padStart(2, '0');
+    return `${date.getFullYear()}-${pad(date.getMonth() + 1)}-${pad(date.getDate())}`;
+  }
+  function toggleCompletion(habits, id, date = new Date()) {
+    const day = localDate(date);
+    return habits.map(habit => {
+      if (habit.id !== id) return habit;
+      const completions = { ...(habit.completions || {}) };
+      const prior = completions[day];
+      completions[day] = { completed: !(prior && prior.completed), updatedAt: date.toISOString() };
+      return { ...habit, completions };
+    });
+  }
+  return { KEY, validTime, validate, load, save, localDate, toggleCompletion };
 })();
 if (typeof module !== 'undefined' && module.exports) module.exports = HabitCore;
 
@@ -51,7 +65,25 @@ if (typeof document !== 'undefined') {
       if (habit.description) { const description = document.createElement('p'); description.textContent = habit.description; item.append(description); }
       const meta = document.createElement('p'); meta.className = 'habit-meta';
       meta.textContent = (habit.schedule === 'daily' ? 'Каждый день' : habit.days.map(day => dayNames[day]).join(', ')) + ' · Активна' + (habit.reminderEnabled ? ` · ${habit.reminderTime}` : '');
-      item.append(meta); list.append(item);
+      item.append(meta);
+      const completed = !!habit.completions?.[HabitCore.localDate()]?.completed;
+      const status = document.createElement('p'); status.className = 'habit-status';
+      status.textContent = completed ? 'Сегодня выполнено' : 'Сегодня ещё не выполнено';
+      const button = document.createElement('button'); button.type = 'button';
+      button.className = completed ? 'done-button' : 'mark-button';
+      button.textContent = completed ? 'Отменить отметку' : 'Отметить выполнение';
+      button.setAttribute('aria-label', `${button.textContent}: ${habit.name}`);
+      button.addEventListener('click', () => {
+        try {
+          const next = HabitCore.toggleCompletion(habits, habit.id);
+          HabitCore.save(localStorage, next); habits = next; render();
+          storageError.hidden = true;
+        } catch (_) {
+          storageError.textContent = 'Не удалось сохранить отметку. Проверьте доступ к хранилищу браузера.';
+          storageError.hidden = false;
+        }
+      });
+      item.append(status, button); list.append(item);
     }
   }
   form.addEventListener('change', () => {
