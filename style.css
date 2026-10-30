@@ -35,3 +35,7 @@ button:hover { background: #1c5637; }
 .habit-meta { color: #64786d; font-size: .9rem; }
 .empty { color: #64786d; }
 @media (max-width: 400px) { .container { padding-top: 24px; } .panel, .habit-item, .empty { padding: 17px; } }
+
+.habit-status { color: #426350; font-size: .9rem; }
+.done-button { background: #e4f0e5; color: #235c3c; }
+.done-button:hover { background: #cfe3d3; }

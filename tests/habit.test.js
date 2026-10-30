@@ -16,3 +16,19 @@ test('сохраняет и восстанавливает привычки; п�
   core.save(store, items); assert.deepEqual(core.load(store), items);
   store.setItem(core.KEY, '{bad'); assert.throws(() => core.load(store)); assert.equal(store.getItem(core.KEY), '{bad');
 });
+
+test('отметка и отмена изменяют только текущую локальную дату без дубликатов', () => {
+  const before = [{ id: '1', completions: { '2026-10-29': { completed: true, updatedAt: 'earlier' } } }, { id: '2', completions: {} }];
+  const now = new Date(2026, 9, 30, 12, 10);
+  const date = core.localDate(now);
+  const marked = core.toggleCompletion(before, '1', now);
+  assert.equal(date, '2026-10-30');
+  assert.equal(marked[0].completions[date].completed, true);
+  assert.equal(marked[0].completions[date].updatedAt, now.toISOString());
+  assert.equal(marked[0].completions['2026-10-29'].completed, true);
+  assert.deepEqual(marked[1], before[1]);
+  const undone = core.toggleCompletion(marked, '1', now);
+  assert.equal(undone[0].completions[date].completed, false);
+  assert.equal(Object.keys(undone[0].completions).length, 2);
+  const store = storage(); core.save(store, undone); assert.deepEqual(core.load(store), undone);
+});
