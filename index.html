@@ -9,9 +9,30 @@
 </head>
 <body>
   <main class="container">
-    <h1>Трекер привычек</h1>
-    <p>Небольшие действия каждый день.</p>
-    <div id="app"></div>
+    <header class="intro"><p class="eyebrow">МАЛЕНЬКИЕ ШАГИ · БОЛЬШИЕ ПЕРЕМЕНЫ</p><h1>Трекер привычек</h1><p>Создавайте привычки и отмечайте свой прогресс.</p></header>
+    <section class="panel" aria-labelledby="form-title">
+      <h2 id="form-title">Новая привычка</h2>
+      <form id="habit-form" novalidate>
+        <label for="habit-name">Название <span aria-hidden="true">*</span></label>
+        <input id="habit-name" name="name" maxlength="100" required autocomplete="off" placeholder="Например, прогулка">
+        <label for="habit-description">Описание <span class="muted">необязательно</span></label>
+        <input id="habit-description" name="description" maxlength="300" placeholder="Добавьте подробности">
+        <fieldset><legend>Расписание</legend><label class="inline"><input type="radio" name="schedule" value="daily" checked> Каждый день</label><label class="inline"><input type="radio" name="schedule" value="weekly"> Выбрать дни</label>
+          <div id="weekdays" class="days" hidden>
+            <label><input type="checkbox" name="days" value="1"> Пн</label><label><input type="checkbox" name="days" value="2"> Вт</label><label><input type="checkbox" name="days" value="3"> Ср</label><label><input type="checkbox" name="days" value="4"> Чт</label><label><input type="checkbox" name="days" value="5"> Пт</label><label><input type="checkbox" name="days" value="6"> Сб</label><label><input type="checkbox" name="days" value="0"> Вс</label>
+          </div>
+        </fieldset>
+        <label class="inline"><input id="reminder-enabled" type="checkbox"> Указать время напоминания</label>
+        <div id="reminder-field" hidden><label for="reminder-time">Время (24 часа)</label><input id="reminder-time" type="time"></div>
+        <p id="form-error" class="error" role="alert" hidden></p>
+        <button type="submit">Добавить привычку</button>
+      </form>
+    </section>
+    <section class="list-section" aria-labelledby="list-title"><div class="list-heading"><h2 id="list-title">Мои привычки</h2><span id="count" class="count">0</span></div>
+      <p id="storage-error" class="error" role="alert" hidden></p>
+      <p id="empty" class="empty">Здесь появятся ваши привычки. Добавьте первую выше.</p>
+      <ul id="habit-list" class="habit-list"></ul>
+    </section>
   </main>
 </body>
 </html>
