@@ -1,0 +1,36 @@
+@startuml
+skinparam shadowing false
+skinparam backgroundColor #FFFFFF
+skinparam defaultFontName SansSerif
+skinparam defaultFontColor #183045
+skinparam sequenceArrowColor #405E78
+skinparam participantBorderColor #557796
+skinparam participantBackgroundColor #F1F7FC
+hide footbox
+
+title 3. Открытие списка привычек · Прототип
+actor "Пользователь" as User
+boundary "Главная страница" as UI
+control "Логика HabitCore" as Core
+database "localStorage" as Store
+
+User -> UI: Открывает или перезагружает страницу
+activate UI
+UI -> Core: load(хранилище)
+activate Core
+Core -> Store: getItem(ключ приложения)
+Store --> Core: JSON, отсутствующее значение или ошибка чтения
+Core -> Core: Если данные есть, разобрать JSON\nи проверить, что это массив
+Core --> UI: Массив привычек или исключение
+deactivate Core
+alt Есть привычки
+  UI -> UI: Рассчитать статус за сегодня по местной дате
+  UI --> User: Карточки со статусом и расписанием
+else Список пуст или это первый запуск
+  UI --> User: Подсказка о добавлении первой привычки
+else Данные повреждены или недоступны
+  UI -> UI: Пометить хранилище недоступным для сохранения
+  UI --> User: Ошибка чтения и пустой список
+end
+deactivate UI
+@enduml

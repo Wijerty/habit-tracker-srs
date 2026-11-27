@@ -1,0 +1,46 @@
+@startuml
+skinparam shadowing false
+skinparam backgroundColor #FFFFFF
+skinparam defaultFontName SansSerif
+skinparam defaultFontColor #183045
+skinparam sequenceArrowColor #405E78
+skinparam participantBorderColor #557796
+skinparam participantBackgroundColor #F1F7FC
+hide footbox
+
+title 1. Добавление привычки · Прототип
+actor "Пользователь" as User
+boundary "Форма и список" as UI
+control "Логика HabitCore" as Core
+database "localStorage" as Store
+
+User -> UI: Вводит название и расписание,\nпри необходимости указывает описание и время
+User -> UI: Нажимает «Добавить привычку»
+activate UI
+alt Данные приложения не загрузились при открытии
+  UI --> User: Сообщение о недоступности сохранения
+else Хранилище доступно для попытки записи
+  UI -> Core: validate(поля формы)
+  activate Core
+  Core --> UI: Нормализованные поля или ошибка
+  deactivate Core
+  alt Ввод не прошёл проверку
+    UI --> User: Сообщение об ошибке, форма сохраняет ввод
+  else Ввод корректен
+    UI -> UI: Создать UUID и привычку с пустой историей
+    UI -> Core: save(новый список)
+    activate Core
+    Core -> Store: setItem(ключ, JSON)
+    Store --> Core: Запись завершена или выброшено исключение
+    Core --> UI: Сохранено или ошибка
+    deactivate Core
+    alt Запись успешна
+      UI -> UI: Принять новый список, очистить форму\nи перерисовать карточки
+      UI --> User: Новая привычка в списке
+    else Ошибка записи
+      UI --> User: Сообщение об ошибке, исходный список и ввод сохранены
+    end
+  end
+end
+deactivate UI
+@enduml
