@@ -1,0 +1,68 @@
+@startuml
+!pragma layout smetana
+top to bottom direction
+skinparam shadowing false
+skinparam backgroundColor #FFFFFF
+skinparam defaultFontName SansSerif
+skinparam defaultFontColor #183045
+skinparam ArrowColor #405E78
+skinparam UsecaseBorderColor #557796
+skinparam UsecaseBackgroundColor #F1F7FC
+skinparam ActorBorderColor #405E78
+skinparam RectangleBorderColor #557796
+
+title Трекер привычек · Диаграмма вариантов использования
+actor "Пользователь" as User
+rectangle "Трекер привычек" {
+  rectangle "Браузерный прототип" {
+    usecase "Просмотреть список\nпривычек" as List
+    usecase "Добавить привычку" as Add
+    usecase "Отметить выполнение\nза сегодня" as Mark
+    usecase "Отменить отметку\nза сегодня" as Undo
+    usecase "Задать время\nнапоминания" as SetTime
+    usecase "Проверить ввод" as Validate
+    usecase "Сохранить изменения" as Save
+  }
+
+  rectangle "Целевые функции по ТЗ" {
+    usecase "Редактировать привычку" as Edit #FFF5DC
+    usecase "Архивировать привычку" as Archive #FFF5DC
+    usecase "Восстановить из архива" as Restore #FFF5DC
+    usecase "Просмотреть календарь\nи текущую серию" as History #FFF5DC
+    usecase "Посмотреть статистику\nза неделю или месяц" as Stats #FFF5DC
+    usecase "Включить или выключить\nнапоминание" as Configure #FFF5DC
+    usecase "Получить напоминание" as Notify #FFF5DC
+  }
+}
+actor "Системные уведомления\nбраузера" as Browser
+
+User -- List
+User -- Add
+User -- Mark
+User -- Undo
+User -- Edit
+User -- Archive
+User -- Restore
+User -- History
+User -- Stats
+User -- Configure
+User -- Notify
+Notify -- Browser
+
+' Arrange related planned actions in columns.
+Edit -[hidden]down-> Archive
+Archive -[hidden]down-> Restore
+History -[hidden]down-> Stats
+Configure -[hidden]down-> Notify
+
+Add .down.> Validate : <<include>>
+Add .down.> Save : <<include>>
+Mark .down.> Save : <<include>>
+Undo .down.> Save : <<include>>
+SetTime .up.> Add : <<extend>>
+
+legend bottom
+  include — обязательный шаг · extend — расширение по условию
+  Время напоминания задаётся, когда пользователь включает это поле при создании.
+endlegend
+@enduml
