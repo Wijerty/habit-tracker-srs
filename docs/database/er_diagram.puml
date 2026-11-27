@@ -1,0 +1,67 @@
+@startuml
+!pragma layout smetana
+left to right direction
+hide circle
+hide methods
+skinparam shadowing false
+skinparam backgroundColor #FFFFFF
+skinparam defaultFontName SansSerif
+skinparam defaultFontColor #183045
+skinparam ArrowColor #405E78
+skinparam classBackgroundColor #F1F7FC
+skinparam classBorderColor #557796
+skinparam classFontColor #173C5B
+skinparam classAttributeFontColor #183045
+
+title Трекер привычек · Реляционная схема SQLite
+
+entity "Привычки\nhabits" as H {
+  * habit_id : INTEGER <<PK>>
+  --
+  * title : TEXT
+  description : TEXT
+  * created_at : TEXT
+  archived_at : TEXT
+}
+entity "Версии расписания\nhabit_schedules" as S {
+  * schedule_id : INTEGER <<PK>>
+  --
+  * habit_id : INTEGER <<FK>>
+  * effective_from : TEXT
+  --
+  UQ (habit_id, effective_from)
+}
+entity "Дни расписания\nschedule_weekdays" as SW {
+  * schedule_id : INTEGER <<PK, FK>>
+  * weekday_id : INTEGER <<PK, FK>>
+}
+entity "Дни недели\nweekdays" as W {
+  * weekday_id : INTEGER <<PK>>
+  --
+  * name_ru : TEXT <<UQ>>
+}
+entity "Отметки выполнения\nhabit_completions" as C {
+  * habit_id : INTEGER <<PK, FK>>
+  * local_date : TEXT <<PK>>
+  --
+  * completed : INTEGER
+  * updated_at : TEXT
+}
+entity "Настройки напоминания\nhabit_reminders" as R {
+  * habit_id : INTEGER <<PK, FK>>
+  --
+  * enabled : INTEGER
+  * local_time : TEXT
+}
+
+H ||--o{ S : версии
+S ||--o{ SW : выбранные дни
+W ||--o{ SW : входит в
+H ||--o{ C : история
+H ||--o| R : настройки
+
+legend bottom
+  PK — первичный ключ · FK — внешний ключ · UQ — уникальность
+  * — обязательное поле. Рабочая версия расписания содержит 1–7 дней.
+endlegend
+@enduml
