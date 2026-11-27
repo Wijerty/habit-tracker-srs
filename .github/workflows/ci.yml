@@ -24,3 +24,5 @@ jobs:
         run: npm test
       - name: Build application
         run: npm run build
+      - name: Validate SQLite schema and seed data
+        run: python3 database/verify.py
