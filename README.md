@@ -52,3 +52,10 @@ npm run build
 - [Схема SQLite](database/schema.sql) · [тестовые данные](database/seed_data.sql)
 
 Проверка схемы и тестовых данных: `python3 database/verify.py`. Та же проверка выполняется в GitHub Actions.
+
+## Лабораторная работа 5. Моделирование поведения
+
+Use Case диаграмма показывает возможности «Трекера привычек» и участников сценариев. Четыре диаграммы последовательности описывают создание привычки, отметку и отмену выполнения, открытие списка и ежедневный сценарий с планируемой статистикой.
+
+- [Use Case PNG](docs/use_case/use_case_diagram.png) · [SVG](docs/use_case/use_case_diagram.svg)
+- [Диаграммы последовательности и описание сценариев](docs/behavior/README.md) · [копия в Wiki](https://github.com/Wijerty/habit-tracker-srs/wiki/behavior-modeling)
